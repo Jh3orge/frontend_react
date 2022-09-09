@@ -50,6 +50,7 @@
             text-transform: uppercase;
             font-weight: 400;
             transition: all 0.3s ease-in-out;
+            letter-spacing: 0.1rem;
 
             &:hover {
                 color: var(--secondary-color);
