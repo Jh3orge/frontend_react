@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { AiFillEye, AiFillGithub } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
-import { AppWrap } from '../../wrapper';
+import { AppWrap, MotionWrap } from '../../wrapper';
 import { urlFor, client } from '../../client';
 import './Projects.scss';
 
@@ -25,8 +25,20 @@ const Projects = () => {
   }, [])
 
   const handleWorkFilter = (item) => {
+    setactiveFilter(item);
+    setanimateCard([{ y:100, opacity: 0}]);
 
+    setTimeout( ()  => {
+      setanimateCard([{ y:0, opacity: 1}]);
+
+      if(item === "All") {
+        setfilterWork(works);
+      } else {
+        setfilterWork(works.filter((work) => work.tags.includes(item)));
+      }
+    })
   }
+
   return (
     <>
       <h2 className="head-text">My Creative <span>Portoflio</span> <span>Section</span></h2>
@@ -97,4 +109,8 @@ const Projects = () => {
   )
 }
 
-export default AppWrap(Projects, 'work');
+export default AppWrap(
+  MotionWrap(Projects, 'app__works'),
+  'work',
+  'app__primarybg',
+);
